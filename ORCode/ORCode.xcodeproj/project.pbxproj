@@ -12,6 +12,8 @@
 		9771AA161EF4C33500A994BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9771AA141EF4C33500A994BE /* Main.storyboard */; };
 		9771AA181EF4C33500A994BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9771AA171EF4C33500A994BE /* Assets.xcassets */; };
 		9771AA1B1EF4C33500A994BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9771AA191EF4C33500A994BE /* LaunchScreen.storyboard */; };
+		9771AA231EF4C54B00A994BE /* QRCodeGenerateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9771AA221EF4C54B00A994BE /* QRCodeGenerateController.swift */; };
+		9771AA251EF4C55B00A994BE /* QRCodeScanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9771AA241EF4C55B00A994BE /* QRCodeScanController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		9771AA171EF4C33500A994BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9771AA1A1EF4C33500A994BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9771AA1C1EF4C33500A994BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9771AA221EF4C54B00A994BE /* QRCodeGenerateController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeGenerateController.swift; sourceTree = "<group>"; };
+		9771AA241EF4C55B00A994BE /* QRCodeScanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeScanController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 			children = (
 				9771AA101EF4C33500A994BE /* AppDelegate.swift */,
 				9771AA121EF4C33500A994BE /* ViewController.swift */,
+				9771AA241EF4C55B00A994BE /* QRCodeScanController.swift */,
+				9771AA221EF4C54B00A994BE /* QRCodeGenerateController.swift */,
 				9771AA141EF4C33500A994BE /* Main.storyboard */,
 				9771AA171EF4C33500A994BE /* Assets.xcassets */,
 				9771AA191EF4C33500A994BE /* LaunchScreen.storyboard */,
@@ -137,8 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9771AA251EF4C55B00A994BE /* QRCodeScanController.swift in Sources */,
 				9771AA131EF4C33500A994BE /* ViewController.swift in Sources */,
 				9771AA111EF4C33500A994BE /* AppDelegate.swift in Sources */,
+				9771AA231EF4C54B00A994BE /* QRCodeGenerateController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
