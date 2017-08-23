@@ -27,7 +27,7 @@ class QRCodeGenerateController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let ciimage = generatorQRCode() else { return }
         
-        guard let outImg = colorfullQRCode(ciimage, bgColor: CIColor.green(), qrColor: CIColor.yellow()) else { return }
+        guard let outImg = colorfulQRCode(ciimage, bgColor: CIColor.green(), qrColor: CIColor.yellow()) else { return }
         
         var img = UIImage(ciImage: outImg)
         // 中间添加一张头像
@@ -78,7 +78,7 @@ class QRCodeGenerateController: UIViewController {
     }
     
     // 给二维码添加颜色
-    func colorfullQRCode(_ img: CIImage, bgColor: CIColor, qrColor: CIColor) -> CIImage? {
+    func colorfulQRCode(_ img: CIImage, bgColor: CIColor, qrColor: CIColor) -> CIImage? {
         // 创建过滤器
         guard let filter = CIFilter(name: "CIFalseColor") else { return nil }
         filter.setDefaults()

@@ -30,7 +30,21 @@ class QRCodeScanController: UIViewController {
         
         view.addSubview(imgView)
         
-        scan()
+        let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        switch status {
+        case .authorized:
+            scan()
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted) in
+                if granted {
+                    self.scan()
+                }
+            })
+        default:
+            let alertVC = UIAlertController(title: "", message: "请到设置界面开启摄像功能", preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "知道了", style: .default, handler: nil))
+            present(alertVC, animated: true, completion: nil)
+        }
     }
     
     func scan() {
@@ -58,7 +72,8 @@ class QRCodeScanController: UIViewController {
         let w = imgView.frame.size.width / width
         let h = imgView.frame.size.height / height
         
-        output.rectOfInterest = CGRect(x: y, y: x, width: h, height: w)
+        // 测试出来的 rectOfInterest 的算法
+        output.rectOfInterest = CGRect(x: y, y: 1-x-w, width: h, height: w)
         
         let layer = AVCaptureVideoPreviewLayer(session: session)
         layer?.frame = view.layer.bounds
@@ -77,6 +92,7 @@ extension QRCodeScanController: AVCaptureMetadataOutputObjectsDelegate {
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         for item in metadataObjects {
             print((item as! AVMetadataMachineReadableCodeObject).stringValue)
+            title = (item as! AVMetadataMachineReadableCodeObject).stringValue
         }
     }
 }
