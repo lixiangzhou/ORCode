@@ -20,5 +20,9 @@ class ViewController: UIViewController {
         navigationController?.pushViewController(QRCodeScanController(), animated: true)
     }
 
+    
+    @IBAction func qrcodeDetect(_ sender: Any) {
+        navigationController?.pushViewController(QRCodeDetectController(), animated: true)
+    }
 }
 

@@ -13,6 +13,8 @@ class QRCodeGenerateController: UIViewController {
 
     var imgView: UIImageView!
     
+    var textLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,8 +22,14 @@ class QRCodeGenerateController: UIViewController {
         
         
         imgView = UIImageView(frame: CGRect(x: 0, y: 64, width: view.bounds.width, height: view.bounds.width))
-        
         view.addSubview(imgView)
+        
+        textLabel = UILabel(frame: CGRect(x: 20, y: imgView.frame.maxY + 30, width: view.bounds.width - 40, height: view.bounds.height - imgView.frame.maxY - 30 - 30))
+        textLabel.textAlignment = .center
+        textLabel.numberOfLines = 0
+        textLabel.text = "http://www.baidu.com"
+        view.addSubview(textLabel)
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -44,7 +52,7 @@ class QRCodeGenerateController: UIViewController {
         filter.setDefaults()
         
         // 设置输入数据
-        guard let data = "http://www.baidu.com".data(using: String.Encoding.utf8) else { return nil }
+        guard let data = textLabel.text!.data(using: String.Encoding.utf8) else { return nil }
         filter.setValue(data, forKey: "inputMessage")
         
         /*

@@ -13,6 +13,8 @@ class QRCodeScanController: UIViewController {
 
     var imgView: UIImageView!
     
+    var textLabel: UILabel!
+    
     var session = AVCaptureSession()
     
     weak var previewLayer: AVCaptureVideoPreviewLayer?
@@ -29,6 +31,12 @@ class QRCodeScanController: UIViewController {
         imgView.layer.borderWidth = 1
         
         view.addSubview(imgView)
+        
+        textLabel = UILabel(frame: CGRect(x: 20, y: imgView.frame.maxY + 30, width: view.bounds.width - 40, height: view.bounds.height - imgView.frame.maxY - 30 - 30))
+        textLabel.textAlignment = .center
+        textLabel.numberOfLines = 0
+        view.addSubview(textLabel)
+        
         
         let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         switch status {
@@ -92,7 +100,7 @@ extension QRCodeScanController: AVCaptureMetadataOutputObjectsDelegate {
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         for item in metadataObjects {
             print((item as! AVMetadataMachineReadableCodeObject).stringValue)
-            title = (item as! AVMetadataMachineReadableCodeObject).stringValue
+            textLabel.text = (item as! AVMetadataMachineReadableCodeObject).stringValue
         }
     }
 }
