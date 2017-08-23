@@ -25,13 +25,26 @@ class QRCodeGenerateController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let ciimage = generatorQRCode() else { return }
+        
+        guard let outImg = colorfullQRCode(ciimage, bgColor: CIColor.green(), qrColor: CIColor.yellow()) else { return }
+        
+        var img = UIImage(ciImage: outImg)
+        // 中间添加一张头像
+        img = add(centerImg: UIImage(named: "icon")!, toOriginImg: img)
+        
+        imgView.image = img
+    }
+    
+    // 生成二维码
+    func generatorQRCode() -> CIImage? {
         // "CIQRCodeGenerator" 有两个字段可以设置 inputMessage inputCorrectionLevel
-        guard let filter = CIFilter(name: "CIQRCodeGenerator") else { return }
+        guard let filter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
         
         filter.setDefaults()
         
         // 设置输入数据
-        guard let data = "http://www.baidu.com".data(using: String.Encoding.utf8) else { return }
+        guard let data = "http://www.baidu.com".data(using: String.Encoding.utf8) else { return nil }
         filter.setValue(data, forKey: "inputMessage")
         
         /*
@@ -45,7 +58,7 @@ class QRCodeGenerateController: UIViewController {
         filter.setValue("M", forKey: "inputCorrectionLevel")
         
         // 输出数据
-        guard var ciimage = filter.outputImage else { return }
+        guard var ciimage = filter.outputImage else { return nil}
         
         /*
          图片放大，生成高清图片
@@ -61,13 +74,24 @@ class QRCodeGenerateController: UIViewController {
          */
         ciimage = ciimage.applyingOrientation(3)
         
-        var img = UIImage(ciImage: ciimage)
-        // 中间添加一张头像
-        img = add(centerImg: UIImage(named: "icon")!, toOriginImg: img)
-        
-        imgView.image = img
+        return ciimage
     }
     
+    // 给二维码添加颜色
+    func colorfullQRCode(_ img: CIImage, bgColor: CIColor, qrColor: CIColor) -> CIImage? {
+        // 创建过滤器
+        guard let filter = CIFilter(name: "CIFalseColor") else { return nil }
+        filter.setDefaults()
+        // 添加要处理的图片
+        filter.setValue(img, forKey: "inputImage")
+        // 设置背景色和码色
+        filter.setValue(qrColor, forKey: "inputColor0")
+        filter.setValue(bgColor, forKey: "inputColor1")
+        
+        return filter.outputImage
+    }
+    
+    // 给二维码添加中间图像
     func add(centerImg: UIImage, toOriginImg: UIImage) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(toOriginImg.size, true, 0)
         
