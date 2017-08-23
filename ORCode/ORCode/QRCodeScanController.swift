@@ -70,7 +70,21 @@ class QRCodeScanController: UIViewController {
         session.addInput(input)
         session.addOutput(output)
         
-        output.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+        output.metadataObjectTypes = [
+            AVMetadataObjectTypeQRCode,
+            AVMetadataObjectTypeCode93Code,
+            AVMetadataObjectTypeCode39Code,
+            AVMetadataObjectTypeITF14Code,
+            AVMetadataObjectTypeEAN13Code,
+            AVMetadataObjectTypeAztecCode,
+            AVMetadataObjectTypeUPCECode,
+            AVMetadataObjectTypeEAN8Code,
+            AVMetadataObjectTypePDF417Code,
+            AVMetadataObjectTypeCode128Code,
+            AVMetadataObjectTypeDataMatrixCode,
+            AVMetadataObjectTypeCode39Mod43Code,
+            AVMetadataObjectTypeInterleaved2of5Code,
+        ]
         
         let width = view.bounds.width
         let height = view.bounds.height
